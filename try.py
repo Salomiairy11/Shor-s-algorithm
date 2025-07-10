@@ -5,8 +5,25 @@ from qiskit import QuantumCircuit,Aer,execute
 from qiskit.tools.visualization import plot_histogram
 import matplotlib.pyplot as plt
 
+'''
+Aer is Qiskit's module that provides simulators to mimic how a quantum computer behaves.
+This is a quantum circuit simulator that mimics how real quantum computers would behave when measuring qubits.
+It executes circuits multiple times (shots) to collect measurement outcomes (since quantum results are probabilistic).
+This line sets up a quantum simulator where we'll "pretend" to run Shor’s algorithm like on a real quantum computer.
+'''
 backend = Aer.get_backend('qasm_simulator')
+
+'''
+creating a QuantumInstance—this is a wrapper that handles:
+Backend configuration
+Number of shots (how many times to run the circuit)
+'''
 quantum_instance = QuantumInstance(backend,shots=1000)
+
+'''creating an instance of the Shor class, with these parameters:
+N=15 is The number you want to factor.
+a=2	is a random integer < N and coprime with N. Shor’s algorithm works by finding the period of a^x mod N.
+'''
 my_shor = Shor(N=15,a=2,quantum_instance=quantum_instance)
 
 print(Shor.run(my_shor))
