@@ -2,9 +2,9 @@ class RSA:
     def __init__(self, publicKey=None, privateKey=None):
         # default values if none provided
         if publicKey is None:
-            publicKey = { "e": 5, "n": 35 }
+            publicKey = { "e": 3, "n": 15 }
         if privateKey is None:
-            privateKey = { "d": 29, "n": 35 }
+            privateKey = { "d": 3, "n": 15 }
         
         self.publicKey = publicKey
         self.privateKey = privateKey

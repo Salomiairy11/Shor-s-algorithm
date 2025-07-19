@@ -1,6 +1,9 @@
 import streamlit as st
 import base64
 from math import gcd
+from qiskit.aqua.algorithms import Shor
+from qiskit.aqua import QuantumInstance
+from qiskit import Aer
 from rsa import RSA as MyRSA
 from aes import AES as MyAES
 
@@ -11,6 +14,34 @@ enc_aes_key_b64 = st.text_input("Enter RSA-encrypted AES key (base64):")
 enc_message_b64 = st.text_input("Enter AES-encrypted message (base64):")
 iv_b64 = "AAAAAAAAAAAAAAAAAAAAAA=="
 
+def quantum_shor_factor(N):
+    """
+    Use Qiskit's Shor algorithm to factor N
+    """
+    # Set up quantum backend
+    backend = Aer.get_backend('qasm_simulator')
+    quantum_instance = QuantumInstance(backend, shots=5)
+    
+    # Try different values of 'a' for Shor's algorithm
+    for a in range(2, min(N, 10)):
+        if gcd(a, N) != 1:
+            factor = gcd(a, N)
+            return factor, N // factor
+        
+        # Create Shor instance
+        shor_instance = Shor(N=N, a=a, quantum_instance=quantum_instance)
+        
+        # Run Shor's algorithm
+        result = shor_instance.run()
+        
+        # Extract factors from result
+        if hasattr(result, 'factors') and result.factors:
+            factors = result.factors[0]
+            if len(factors) == 2:
+                p, q = factors
+                if p * q == N and p > 1 and q > 1:
+                    return p, q
+    return None, None
 
 if st.button("Decrypt"):
     try:
@@ -19,35 +50,17 @@ if st.button("Decrypt"):
         ciphertext_bytes = base64.b64decode(enc_message_b64)
         iv_bytes = base64.b64decode(iv_b64)
 
-        # Factor RSA modulus N
-        def find_order(a, N):
-            seen = {}
-            x = 1
-            for r in range(1, N):
-                x = (x * a) % N
-                if x in seen:
-                    return r - seen[x]
-                seen[x] = r
-            return None
-
-        def shor_factor(N):
-            for a in range(2, N):
-                if gcd(a, N) != 1:
-                    return gcd(a, N), N // gcd(a, N)
-                r = find_order(a, N)
-                if r and r % 2 == 0:
-                    factor1 = gcd(pow(a, r//2) - 1, N)
-                    factor2 = gcd(pow(a, r//2) + 1, N)
-                    if factor1 * factor2 == N:
-                        return factor1, factor2
-            return None, None
-
-        p, q = shor_factor(N)
+        # Use quantum Shor's algorithm to factor RSA modulus N
+        p, q = quantum_shor_factor(N)
+        
         if not p or not q:
             st.error("Failed to factor N.")
         else:
+            st.write(f"**Prime factors:** p = {p}, q = {q}")
+            
+            # Calculate private key
             phi = (p - 1) * (q - 1)
-            e = 5
+            e = 5  # Changed to e=5 for N=21
             d = pow(e, -1, phi)
 
             st.write(f"**RSA Private Exponent d:** `{d}`")
