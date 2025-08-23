@@ -3,9 +3,10 @@ from rsa import RSA
 import base64
 
 # 1. AES key and plaintext
-key_hex = "2b7e151628aed2a6abf7158809cf4f3c"  # 16 bytes, 32 hex chars
+key_hex = "2a7c041526bcd2a4abe6158809ce4d3"  # 16 bytes, 32 hex chars
 key_int = int(key_hex, 16)
 aes = AES(key_int)
+
 
 plaintext = b'hello rojal' + b'\x00' * (16 - len('hello rojal'))  # pad to 16 bytes
 plaintext_int = int.from_bytes(plaintext, 'big')
@@ -19,7 +20,7 @@ print("AES-encrypted message (base64):", cipher_b64)
 
 # 3. RSA-encrypt the AES key (digit-by-digit) with N=21
 # N=21 = 3×7, φ(21) = 2×6 = 12, e=5, d=5 (since 5×5 ≡ 1 mod 12)
-rsa = RSA(publicKey={"e": 5, "n": 21})  # Using N=21 to allow all hex digits 0-f
+rsa = RSA(publicKey={"e": 3, "n": 15})  # Using N=21 to allow all hex digits 0-f
 cipher_chunks = rsa.encrypt(key_hex)     # List of integers, one per hex digit
 
 # Turn each chunk into a byte
@@ -35,7 +36,7 @@ iv_b64 = base64.b64encode(iv_bytes).decode()
 print("AES IV (base64):", iv_b64)
 
 print("\n=== For use in Streamlit app ===")
-print("RSA modulus N: 21")
+print("RSA modulus N: 15")
 print(f"RSA-encrypted AES key (base64): {rsa_enc_aes_key_b64}")
 print(f"AES-encrypted message (base64): {cipher_b64}")
 print(f"AES IV (base64): {iv_b64}")
