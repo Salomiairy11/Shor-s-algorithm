@@ -21,65 +21,124 @@ footer {
   color: #00ff00 !important;
 }
 
-.stButton > button {
-  background: #000 !important;
-  color: #00ff00 !important;
-  border: 2px solid #00ff00 !important;
-  border-radius: 6px;
-  padding: 8px 18px;
+.start-button-container .stButton > button {
+  background: rgba(0, 255, 0, 0.1);
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
   font-weight: 600;
+  font-size: 1.2rem;
+  border: 2px solid #00ff00;
+  border-radius: 12px;
+  padding: 12px 26px;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+}
+
+.start-button-container .stButton > button:hover {
+  background: rgba(0, 255, 0, 0.2);
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.4);
+  transform: translateY(-3px);
+  border-color: #00ff88;
+  color: #00ff88;
+}
+
+.start-button-container .stButton > button:active {
+  transform: translateY(-1px);
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+}
+
+
+.stButton > button {
+  background: linear-gradient(45deg, #00ff00, #00cc00);
+  color: #000000;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: 2px solid #00ff00;
+  border-radius: 8px;
+  padding: 8px 14px;
+  margin-top: 57px;
+  margin-left: 41vw;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.stButton > button:hover {
+  background: linear-gradient(45deg, #15c415d0, #009900);
+  box-shadow: 0 0 8px rgba(0, 255, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.page-title {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: linear-gradient(45deg, #00ff00, #00cc00);
+  background: rgba(0, 0, 0, 0.85);
+  padding: 12px 0;
+  z-index: 9999;
+  border-bottom: 2px solid #00ff00;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .terminal {
-  background: #000000; /* black background */
-  color: #00ff00; /* neon green text */
+  background: #000000;
+  color: #00ff00;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 16px; /* slightly bigger */
-  line-height: 1.6; /* more spacing for clarity */
+  font-size: 16px; 
+  line-height: 1.6; 
   border: 2px solid #00ff00;
-  border-radius: 10px; /* rounded borders all around */
+  border-radius: 10px; 
   padding: 25px 15px 15px 15px;
   width: 100%;
-  max-height: 70vh;
+  height: 70vh;
   overflow-y: auto;
   position: relative;
   white-space: pre-wrap;
 }
 
-/* Terminal title bar */
+
 .terminal::before {
-  content: 'root@packetcapture:$$'; /* text */
+  content: 'root@packetcapture:$$';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 25px;
-  background: #00ff00; /* green bar matching borders */
-  color: #000000; /* black text */
+  background: #00ff00; 
+  color: #000000; 
   font-weight: bold;
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* right-aligned */
+  justify-content: flex-start;
   padding: 0 10px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   box-sizing: border-box;
 }
 
-/* Window control circles */
+
 .terminal::after {
   content: '';
   position: absolute;
   top: 6px;
-  right: 10px; /* position from the right */
+  right: 10px;
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: red; /* red dot */
-  box-shadow: -18px 0 yellow, -36px 0 black; /* yellow and black dots */
+  background: red;
+  box-shadow: -18px 0 yellow, -36px 0 black; 
 }
 
-/* Scrollbar styling */
+
 .terminal::-webkit-scrollbar {
   width: 8px;
 }
@@ -94,21 +153,105 @@ footer {
   background: #00ff00;
 }
 
-/* Prompt symbol */
+
+.spinner-large {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(0, 255, 0, 0.3);
+  border-radius: 50%;
+  border-top-color: #00ff00;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.loading-text {
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 8px;
+}
+
+.spinner-red {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 16px solid rgba(51, 255, 0, 0.3);
+  border-radius: 50%;
+  border-top-color: rgb(60, 255, 0);
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+  margin-top: 8px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.packet-counter {
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 6px 0;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 5px;
+  border: 1px solid #00ff00;
+}
+
 .prompt {
   color: #00ff00;
   font-weight: bold;
 }
 
-/* Captured packet header */
 .packet-header-captured {
-  color: #ff0000; /* red for captured packet header */
+  color: #00ff00;
+  font-size: 1rem;
   font-weight: bold;
+  text-shadow: 0 0 8px #00ff00ad;
   display: block;
-  margin-bottom: 6px;
+  text-align: center;
+  margin: 6px 0;
+  padding: 4px;
+  background: rgba(81, 255, 28, 0.1);
+  border: 2px solid #00ff00;
+  border-radius: 5px;
 }
 
-/* Preformatted text inside terminal */
+.blink-effect {
+  animation: blink-traffic 1.5s linear 2;
+}
+
+@keyframes blink-traffic {
+  0%,
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(94, 255, 0, 0.685);
+    border-color: #7bff00bd;
+  }
+  51%,
+  100% {
+    opacity: 0.3;
+    box-shadow: 0 0 5px rgba(145, 255, 0, 0.288);
+    border-color: rgba(123, 255, 0, 0.301);
+  }
+}
+
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .terminal pre {
   margin: 0;
   padding: 0;
@@ -120,12 +263,12 @@ footer {
   white-space: pre-wrap;
 }
 
-/* Hover effect for lines */
+
 .terminal span:hover {
   opacity: 0.8;
 }
 
-/* Added title styling */
+
 .demo-title {
   color: #00ff00;
   font-family: 'Courier New', monospace;
@@ -136,50 +279,6 @@ footer {
   text-shadow: none;
 }
 
-/* Added spinner styling */
-.spinner {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border: 2px solid rgba(0, 255, 0, 0.3);
-  border-radius: 50%;
-  border-top-color: #00ff00;
-  animation: spin 1s ease-in-out infinite;
-  margin-right: 8px;
-}
-
-.spinner-red {
-  border: 2px solid rgba(255, 0, 0, 0.3);
-  border-top-color: #ff0000;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.packet-counter {
-  position: fixed; 
-  top: 30px; /* distance from top */
-  left: 50%; /* center horizontally */
-  transform: translateX(-50%);
-  background: linear-gradient(90deg, #0f0, #00ff99); /* neon green gradient */
-  color: #000; /* text color */
-  font-family: 'Courier New', monospace; /* hacker font */
-  font-size: 1.2rem;
-  font-weight: bold;
-  padding: 12px 24px;
-  border-radius: 10px;
-  box-shadow: 0 0 15px #00ff99, 0 0 30px #0f0 inset;
-  border: 2px solid #0f0;
-  z-index: 9999; /* make sure it’s on top */
-  text-align: center;
-  letter-spacing: 1px;
-  animation: glow 1.5s infinite alternate;
-}
-
-/* glowing animation */
 @keyframes glow {
   from {
     box-shadow: 0 0 15px #00ff99, 0 0 30px #0f0 inset;

@@ -43,7 +43,6 @@ footer {
   white-space: pre-wrap;
 }
 
-/* Terminal top bar */
 .terminal::before {
   content: 'root@packetcapture:$$';
   position: absolute;
@@ -51,7 +50,7 @@ footer {
   left: 0;
   right: 0;
   height: 25px;
-  background: #ff0000; /* swapped green → red */
+  background: #ff0000;
   color: #000000;
   font-weight: bolder;
   display: flex;
@@ -63,7 +62,6 @@ footer {
   box-sizing: border-box;
 }
 
-/* Window control circles on the right */
 .terminal::after {
   content: '';
   position: absolute;
@@ -72,11 +70,11 @@ footer {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #00ff00; /* swapped red → green */
-  box-shadow: -18px 0 yellow, -36px 0 black; /* swapped green → red, yellow unchanged */
+  background: #00ff00; 
+  box-shadow: -18px 0 yellow, -36px 0 black;
 }
 
-/* Scrollbar styling */
+
 .terminal::-webkit-scrollbar {
   width: 8px;
 }
@@ -84,29 +82,54 @@ footer {
   background: #001100;
 }
 .terminal::-webkit-scrollbar-thumb {
-  background: #ff0000; /* swapped */
+  background: #ff0000; 
   border-radius: 4px;
 }
 .terminal::-webkit-scrollbar-thumb:hover {
   background: #ff0000;
 }
 
-/* Prompt symbol */
+
 .prompt {
-  color: #ff0000; /* swapped */
+  color: #ff0000; 
   font-weight: bold;
 }
 
-/* Captured packet header */
-.packet-header {
-  color: #00ff00; /* swapped red → green */
+
+
+.packet-header-captured {
+  color: #ff0800;
+  font-size: 1rem;
   font-weight: bold;
+  text-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
   display: block;
-  margin-bottom: 6px;
+  text-align: center;
+  margin: 6px 0;
+  padding: 4px;
+  background: rgba(252, 12, 12, 0.1);
+  border: 2px solid #ff0000;
+  border-radius: 5px;
 }
 
+.blink-effect {
+  animation: blink-traffic 1.5s linear 2;
+}
 
-/* Preformatted text inside terminal */
+@keyframes blink-traffic {
+  0%,
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+    border-color: rgb(255, 0, 0);
+  }
+  51%,
+  100% {
+    opacity: 0.3;
+    box-shadow: 0 0 5px rgba(255, 107, 0, 0.3);
+    border-color: rgba(255, 107, 0, 0.3);
+  }
+}
+
 .terminal pre {
   margin: 0;
   padding: 0;
@@ -118,27 +141,34 @@ footer {
   white-space: pre-wrap;
 }
 
-/* Hover effect for lines */
 .terminal span:hover {
   opacity: 0.8;
 }
 
-/* Added spinner and loading text styling */
+.error-header {
+  color: red;
+  font-weight: bold;
+}
+
 .loading-text {
   color: #ff0000;
   font-family: 'Courier New', monospace;
+  font-size: 1.3rem;
+  font-weight: bold;
   margin-bottom: 10px;
+  margin-top: 8px;
 }
 
 .spinner-red {
   display: inline-block;
-  width: 12px;
-  height: 12px;
-  border: 2px solid rgba(255, 0, 0, 0.3);
+  width: 30px;
+  height: 30px;
+  border: 16px solid rgba(255, 0, 0, 0.3);
   border-radius: 50%;
   border-top-color: #ff0000;
   animation: spin 1s ease-in-out infinite;
   margin-right: 8px;
+  margin-top: 8px;
 }
 
 @keyframes spin {
