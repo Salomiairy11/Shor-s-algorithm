@@ -1,0 +1,190 @@
+#MainMenu {
+  visibility: hidden;
+}
+header {
+  visibility: hidden;
+}
+footer {
+  visibility: hidden;
+}
+
+.block-container {
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.stApp,
+.block-container {
+  background: #000 !important;
+  color: #00ff00 !important;
+}
+
+.stButton > button {
+  background: #000 !important;
+  color: #00ff00 !important;
+  border: 2px solid #00ff00 !important;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-weight: 600;
+}
+
+.terminal {
+  background: #000000; /* black background */
+  color: #00ff00; /* neon green text */
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px; /* slightly bigger */
+  line-height: 1.6; /* more spacing for clarity */
+  border: 2px solid #00ff00;
+  border-radius: 10px; /* rounded borders all around */
+  padding: 25px 15px 15px 15px;
+  width: 100%;
+  max-height: 70vh;
+  overflow-y: auto;
+  position: relative;
+  white-space: pre-wrap;
+}
+
+/* Terminal title bar */
+.terminal::before {
+  content: 'root@packetcapture:$$'; /* text */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 25px;
+  background: #00ff00; /* green bar matching borders */
+  color: #000000; /* black text */
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* right-aligned */
+  padding: 0 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-sizing: border-box;
+}
+
+/* Window control circles */
+.terminal::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  right: 10px; /* position from the right */
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: red; /* red dot */
+  box-shadow: -18px 0 yellow, -36px 0 black; /* yellow and black dots */
+}
+
+/* Scrollbar styling */
+.terminal::-webkit-scrollbar {
+  width: 8px;
+}
+.terminal::-webkit-scrollbar-track {
+  background: #001100;
+}
+.terminal::-webkit-scrollbar-thumb {
+  background: #00ff00;
+  border-radius: 4px;
+}
+.terminal::-webkit-scrollbar-thumb:hover {
+  background: #00ff00;
+}
+
+/* Prompt symbol */
+.prompt {
+  color: #00ff00;
+  font-weight: bold;
+}
+
+/* Captured packet header */
+.packet-header-captured {
+  color: #ff0000; /* red for captured packet header */
+  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* Preformatted text inside terminal */
+.terminal pre {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  white-space: pre-wrap;
+}
+
+/* Hover effect for lines */
+.terminal span:hover {
+  opacity: 0.8;
+}
+
+/* Added title styling */
+.demo-title {
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+  text-shadow: none;
+}
+
+/* Added spinner styling */
+.spinner {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(0, 255, 0, 0.3);
+  border-radius: 50%;
+  border-top-color: #00ff00;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 8px;
+}
+
+.spinner-red {
+  border: 2px solid rgba(255, 0, 0, 0.3);
+  border-top-color: #ff0000;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.packet-counter {
+  position: fixed; 
+  top: 30px; /* distance from top */
+  left: 50%; /* center horizontally */
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, #0f0, #00ff99); /* neon green gradient */
+  color: #000; /* text color */
+  font-family: 'Courier New', monospace; /* hacker font */
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 12px 24px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #00ff99, 0 0 30px #0f0 inset;
+  border: 2px solid #0f0;
+  z-index: 9999; /* make sure it’s on top */
+  text-align: center;
+  letter-spacing: 1px;
+  animation: glow 1.5s infinite alternate;
+}
+
+/* glowing animation */
+@keyframes glow {
+  from {
+    box-shadow: 0 0 15px #00ff99, 0 0 30px #0f0 inset;
+  }
+  to {
+    box-shadow: 0 0 25px #00ff99, 0 0 50px #0f0 inset;
+  }
+}

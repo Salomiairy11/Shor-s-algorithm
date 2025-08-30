@@ -1,0 +1,148 @@
+#MainMenu {
+  visibility: hidden;
+}
+header {
+  visibility: hidden;
+}
+footer {
+  visibility: hidden;
+}
+
+.block-container {
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.stApp,
+.block-container {
+  background: #000 !important;
+  color: #ff0000 !important;
+}
+
+.terminal {
+  background: #000000;
+  color: #ff0000;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+  line-height: 1.6;
+  border-top: 7px solid #ff0000;
+  border-radius: 0;
+  border-left: 2px solid #ff0000;
+  border-right: 2px solid #ff0000;
+  border-bottom: 4px solid #ff0000;
+  padding: 35px 20px 20px 20px;
+  height: 80vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+
+/* Terminal top bar */
+.terminal::before {
+  content: 'root@packetcapture:$$';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 25px;
+  background: #ff0000; /* swapped green → red */
+  color: #000000;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-sizing: border-box;
+}
+
+/* Window control circles on the right */
+.terminal::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #00ff00; /* swapped red → green */
+  box-shadow: -18px 0 yellow, -36px 0 black; /* swapped green → red, yellow unchanged */
+}
+
+/* Scrollbar styling */
+.terminal::-webkit-scrollbar {
+  width: 8px;
+}
+.terminal::-webkit-scrollbar-track {
+  background: #001100;
+}
+.terminal::-webkit-scrollbar-thumb {
+  background: #ff0000; /* swapped */
+  border-radius: 4px;
+}
+.terminal::-webkit-scrollbar-thumb:hover {
+  background: #ff0000;
+}
+
+/* Prompt symbol */
+.prompt {
+  color: #ff0000; /* swapped */
+  font-weight: bold;
+}
+
+/* Captured packet header */
+.packet-header {
+  color: #00ff00; /* swapped red → green */
+  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
+}
+
+
+/* Preformatted text inside terminal */
+.terminal pre {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  white-space: pre-wrap;
+}
+
+/* Hover effect for lines */
+.terminal span:hover {
+  opacity: 0.8;
+}
+
+/* Added spinner and loading text styling */
+.loading-text {
+  color: #ff0000;
+  font-family: 'Courier New', monospace;
+  margin-bottom: 10px;
+}
+
+.spinner-red {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 0, 0, 0.3);
+  border-radius: 50%;
+  border-top-color: #ff0000;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
